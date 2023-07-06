@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}
+    Gerenciar perfil
+{% endblock 'title' %}
+
+{% block 'head' %}
+    <link rel="stylesheet" type="text/css" href="{% static "perfil/css/home.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "perfil/css/gerenciar.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "perfil/js/gerenciar.js" %}">
+{% endblock 'head' %}
+
+{% block 'body' %}
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="col-md-5">
+                <p class="fonte-destaque">Suas contas</p>
+                <hr>
+
+                <div class="contas">
+                    {% for conta in contas %}
+                        <div class="lista-contas-main">
+                            <div class="col-md-5" style="text-align: start;">
+                                <span><img width="25%" src="{{ conta.icone.url }}">&nbsp&nbsp{{conta.apelido}}</span>
+                            </div>
+                            <div class="col-md-5" style="text-align: end;">
+                                <span class="total-conta positivo ">R$ {{conta.valor}}&nbsp&nbsp&nbsp<a href="{% url 'perfil:remover_banco' conta.id %}"><img width="10%" src="{% static 'perfil/img/remove.png'%}"></a></span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <br>
+                </div>
+
+                <hr>
+                <span class="fonte-destaque">Total:</span>
+                <span class="positivo total-conta font-destaque">R$ {{total}}</span>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-5">
+                <p class="fonte-destaque">Nova conta</p>
+                
+                <form action="{% url 'perfil:cadastrar_banco' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label>Apelido</label>
+                    <input type="text" name="apelido" class="form-control" placeholder="">
+                    <br>
+                    <label>Banco</label>
+                    <select name="banco" class="form-select">
+                        <option value="NU">Nubank</option>
+                        <option value="CE">Caixa Economica</option>
+                    </select>
+                    <br>
+                    <label>Tipo</label>
+                    <select name="tipo" class="form-select">
+                        <option value="PF">Pessoa física</option>
+                        <option value="PJ">Pessoa jurídica</option>
+                    </select>
+                    <br>
+                    <label>Valor</label>
+                    <input type="number" name="valor" class="form-control" placeholder="">
+                    <br>
+                    <input type="file" placeholder="Ícone" name="icone">
+                    <br>
+                    <br>
+                    <input style="width: 100%" type="submit" class="botao-principal">
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-5">
+                <span class="fonte-destaque">Nova categoria</span>
+
+                <form action="{% url 'perfil:cadastrar_categoria' %}" method="POST">
+                    {% csrf_token %}
+                    <label>Categoria</label>
+                    <input type="text" name="categoria" class="form-control">
+                    <br>
+
+                    <input type="checkbox" name="essencial" value="essencial"><label class="positivo">&nbspEssencial</label>
+                    <br>
+                    <br>
+                    <input style="width: 100%" type="submit" class="botao-principal" value="Adicionar">
+                </form>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-5">
+                <span class="fonte-destaque">Suas categoria</span>
+                <br>
+
+                <div class="contas">
+                    {% for categoria in categorias %}
+                        <div class="lista-contas-main">
+                            <div class="col-md-5" style="text-align: start;">
+                                <span>{{categoria.categoria}}</span>
+                            </div>
+                            <div class="col-md-5" style="text-align: end;">
+                                <span class="total-conta">
+                                    <a href="{% url 'perfil:atualizar_categoria' categoria.id %}">
+                                        {% if categoria.essencial %}
+                                            <img width="10%" src="{% static 'perfil/img/confirm.png' %}">
+                                        {% else %}
+                                            <img width="10%" src="{% static 'perfil/img/remove.png' %}">
+                                        {% endif %}
+                                    </a></span>
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock 'body' %}

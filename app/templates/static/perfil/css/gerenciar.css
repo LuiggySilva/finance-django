@@ -1,0 +1,9 @@
+.lista-contas-main {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .lista-contas-main > div:first-child {
+    margin-right: auto;
+  }
+  
