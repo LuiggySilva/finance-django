@@ -56,8 +56,9 @@
                     <br>
                     <label>Banco</label>
                     <select name="banco" class="form-select">
-                        <option value="NU">Nubank</option>
-                        <option value="CE">Caixa Economica</option>
+                        {% for conta in contas %}
+                            <option value="{{conta.banco}}">{{conta.get_banco_display}}</option>
+                        {% endfor %}
                     </select>
                     <br>
                     <label>Tipo</label>

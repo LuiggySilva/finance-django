@@ -53,7 +53,7 @@ def cadastrar_categoria(request):
         messages.add_message(request, constants.ERROR, "Preencha todos os campos!")
         return redirect('perfil:gerenciar')
     
-    categoria = models.Categoria(categoria=categoria, esssencial=essencial)
+    categoria = models.Categoria(categoria=categoria, essencial=essencial)
     categoria.save()
     messages.add_message(request, constants.SUCCESS, "Categoria cadastrada com sucesso!")
     return redirect('perfil:gerenciar')

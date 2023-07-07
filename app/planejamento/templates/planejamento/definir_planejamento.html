@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'perfil/css/home.css' %}" rel="stylesheet">
+    <link href="{% static 'perfil/css/gerenciar.css' %}" rel="stylesheet">
+    <link href="{% static 'extrato/css/view_extrato.css' %}" rel="stylesheet">
+    <script src="{% static 'planejamento/js/definir_planejamento.js' %}" defer></script>
+{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+        <br>
+        <br>
+        <p class="fonte-destaque">Definir planejamento</p>
+        <div class="card">
+            <table>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th>Ação</th>
+                </tr>
+                {% for categoria in categorias %}
+                    <tr class="linha">
+                        <td>{{categoria}}</td>
+                        <td><input id="categoria-id-{{categoria.id}}" type="number" class="form-control" value="{{categoria.valor_planejamento|floatformat:"0"}}"></td>
+                        <td><button data-url="{% url 'planejamento:atualizar_valor_categoria' categoria.id %}" data-categoria-id="{{categoria.id}}" class="bnt-salvar-planejamento" style="width: 100%;" class="botao-secundario">Salvar</button></td>         
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
