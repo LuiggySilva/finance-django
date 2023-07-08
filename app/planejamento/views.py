@@ -7,7 +7,6 @@ from perfil.models import Categoria
 from extrato.models import Valor
 import json, locale
 from datetime import datetime
-locale.setlocale(locale.LC_TIME, 'pt_BR.utf8')
 
 
 def definir_planejamento(request):
