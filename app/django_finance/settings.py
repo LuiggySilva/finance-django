@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'perfil',
     'extrato',
     'planejamento',
+    'conta',
     # apps externos
     'debug_toolbar',
 ]

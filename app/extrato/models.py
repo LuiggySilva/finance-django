@@ -18,4 +18,4 @@ class Valor(models.Model):
         return self.descricao
 
     class Meta:
-         verbose_name_plural = "Valores"
+        verbose_name_plural = "Valores"
