@@ -46,10 +46,10 @@
 
 
 ## Stop and Remove all project Docker files
-1. `docker container stop django_finance-web-1`
-2. `docker container stop django_finance-db-1`
-3. `docker rm django_finance-web-1`
-4. `docker rm django_finance-db-1`
-5. `docker rmi django_finance-web`
-6. `docker volume remove django_finance_postgres_data`
-7. `docker network remove django_finance_default`
+1. `docker container stop finance-django-web-1`
+2. `docker container stop finance-django-db-1`
+3. `docker rm finance-django-web-1`
+4. `docker rm finance-django-db-1`
+5. `docker rmi finance-django-web`
+6. `docker volume remove finance-django_postgres_data`
+7. `docker network remove finance-django_default`
